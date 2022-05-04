@@ -7,6 +7,7 @@ import axios from 'axios'
 
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, IconButton } from '@mui/material'
 import Close from '@mui/icons-material/Close'
+import { useNavigate } from 'react-router-dom'
 
 const ChangeNickname = (props) => {
   const user = props.user
@@ -60,7 +61,6 @@ const ChangeNickname = (props) => {
   </Box>)  
 }
 
-
 const SignOut = (props) => {
   const [open, setOpen] = useState(false)
 
@@ -74,7 +74,6 @@ const SignOut = (props) => {
 }
 
 const SignOutModal = (props) => {
-
   return (<Dialog open={props.open}>
     <DialogTitle>회원탈퇴</DialogTitle>
     <IconButton edge='end' onClick={() => {props.setOpen(false)}} sx={{position: 'absolute', right: 20, top: 20}}>
@@ -98,13 +97,13 @@ const SignOutModal = (props) => {
 
 export default function Account() {
   const user = useSelector((state) => state.user)
+  const navigate = useNavigate()
   
   useEffect(() => {
     if (user.isLoggedIn === false) {
       // 비로그인 사용자 처리
+      // navigate(-1)
     }
-    
-
   })
 
   return (
