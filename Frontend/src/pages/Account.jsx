@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Route } from 'react-router-dom'
-import Divider from '@mui/material/Divider'
-import Box from '@mui/material/Box'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, IconButton } from '@mui/material'
+import { Button, Divider, Box, Dialog, DialogActions, DialogContent, DialogTitle, TextField, IconButton } from '@mui/material'
 import Close from '@mui/icons-material/Close'
-import { useNavigate } from 'react-router-dom'
 
 const ChangeNickname = (props) => {
   const user = props.user
   const [input, setInput] = useState(user.nickname)
-  
   const handleNicknameButton = (event) => {
     event.preventDefault()
     console.log(input)
@@ -28,6 +24,7 @@ const ChangeNickname = (props) => {
       return
     }
 
+    // 유효한 input에 대해서 닉네임 변경 요청
     const newuser = {...user, nickname: input}
     axios({
       baseURL: process.env.REACT_APP_SERVER_URL,
@@ -48,7 +45,8 @@ const ChangeNickname = (props) => {
       console.log(error)
     })
   }
-    
+  
+  // 닉네임 변경 컴포넌트
   return (<Box textAlign='start' m={3}>
   <h3>닉네임 변경</h3>
   <p>새로 사용할 닉네임을 작성해주세요.</p>
@@ -64,6 +62,7 @@ const ChangeNickname = (props) => {
 const SignOut = (props) => {
   const [open, setOpen] = useState(false)
 
+  // 회원 탈퇴 컴포넌트
   return (<Box textAlign='start' m={3}>
     <h3>회원 탈퇴</h3>
     <Box textAlign='center'>
@@ -73,7 +72,29 @@ const SignOut = (props) => {
   </Box>)
 }
 
+
 const SignOutModal = (props) => {
+  const handleSignOut = () => {
+    axios({
+      baseURL: process.env.REACT_APP_SERVER_URL,
+      timeout: 3000,
+      headers: {
+        'Authentication': ''
+      },
+      url: '',
+      method: 'DELETE',
+    })
+    .then(response => {
+      console.log('회원탈퇴가 완료되었습니다.')
+      // 페이지 재로드
+    })
+    .catch(error => {
+      console.log('회원탈퇴에 실패했습니다.')
+      console.log(error)
+    })
+  }
+
+  // 회원 탈퇴 Modal
   return (<Dialog open={props.open}>
     <DialogTitle>회원탈퇴</DialogTitle>
     <IconButton edge='end' onClick={() => {props.setOpen(false)}} sx={{position: 'absolute', right: 20, top: 20}}>
@@ -82,7 +103,7 @@ const SignOutModal = (props) => {
     <DialogContent>
       <p>SSAM에서 탈퇴하시면 더 이상 SSAM이 제공하는 야구 데이터 분석 / 시뮬레이션 정보를 이용하실 수 없습니다. 정말로 탈퇴하시겠습니까?</p>
       <DialogActions>
-        <Button fullWidth variant="contained">
+        <Button fullWidth variant="contained" onClick={handleSignOut}>
           탈퇴
         </Button>
       </DialogActions>
