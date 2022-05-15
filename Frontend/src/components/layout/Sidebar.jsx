@@ -12,7 +12,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import Login from "../modal/Login";
 import { useSelector, useDispatch } from "react-redux";
 
-const Sidebar = props => {
+const Sidebar = (props) => {
   const [selectedIndex, setSelectedIndex] = useState(1);
   const [playerInfoOpen, setPlayerInfoOpen] = useState(false);
   const dispatch = useDispatch();
@@ -32,6 +32,10 @@ const Sidebar = props => {
       dispatch({ type: "battleBoardType" });
     }
 
+    if (index === 3) {
+      dispatch({ type: "simulationType" });
+    }
+
     if (index === 4) {
       setPlayerInfoOpen(!playerInfoOpen);
     } else {
@@ -41,7 +45,7 @@ const Sidebar = props => {
 
   const handleLogout = () => {
     dispatch({ type: "logout" });
-    localStorage.removeItem("token")
+    localStorage.removeItem("token");
   };
 
   const sidebarWidth = 202;
@@ -51,11 +55,11 @@ const Sidebar = props => {
     { name: "공지사항", url: "/board/notice" },
     { name: "자유게시판", url: "/board/free" },
     { name: "배틀게시판", url: "/board/battle" },
-    { name: "시뮬레이션", url: "/" },
+    { name: "시뮬레이션", url: "/simulation" },
   ];
 
-  const isLoggedIn = useSelector(state => state.isLoggedIn);
-  const LogoutButton = props => {
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const LogoutButton = (props) => {
     if (isLoggedIn) {
       return (
         <Box sx={{ mb: 6 }}>
@@ -74,7 +78,7 @@ const Sidebar = props => {
       return <div></div>;
     }
   };
-  const LoginMenu = props => {
+  const LoginMenu = (props) => {
     switch (isLoggedIn) {
       case true:
         return (
@@ -158,7 +162,7 @@ const Sidebar = props => {
                 sx={{ borderRadius: 1 }}
                 button
                 selected={selectedIndex === index}
-                onClick={event => handleMenuClick(event, index)}
+                onClick={(event) => handleMenuClick(event, index)}
                 key={menu.name}
                 color="white"
                 className="nav-item"
@@ -174,7 +178,7 @@ const Sidebar = props => {
               sx={{ borderRadius: 1 }}
               button
               selected={selectedIndex === 4}
-              onClick={event => handleMenuClick(event, 4)}
+              onClick={(event) => handleMenuClick(event, 4)}
               key="선수정보"
               color="white"
               className="nav-item"
@@ -199,7 +203,7 @@ const Sidebar = props => {
               sx={{ borderRadius: 1 }}
               button
               selected={selectedIndex === 5}
-              onClick={event => handleMenuClick(event, 5)}
+              onClick={(event) => handleMenuClick(event, 5)}
               key="나만의 팀"
               color="white"
               className="nav-item"
