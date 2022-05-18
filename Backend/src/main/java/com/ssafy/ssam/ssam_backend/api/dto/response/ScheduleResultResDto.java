@@ -21,12 +21,8 @@ public class ScheduleResultResDto {
     @ApiModelProperty(value = "어웨이 팀")
     private String awayTeam;
     @ApiModelProperty(value = "날짜")
-<<<<<<< HEAD
-
-    private LocalDate date;
-=======
     private LocalDateTime date;
->>>>>>> d4bc3f7f927b717e7051f2102ad59c540184772e
+
     @ApiModelProperty(value = "홈팀 점수")
     private int homeScore;
     @ApiModelProperty(value = "어웨이팀 점수")
