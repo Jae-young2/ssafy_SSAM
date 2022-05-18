@@ -29,7 +29,7 @@ public class ScheduleAndScore {
 
 
     @Column
-    private LocalDate date;
+    private LocalDateTime date;
 
     @Column
     private int homeScore;
