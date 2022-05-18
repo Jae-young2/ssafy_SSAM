@@ -6,9 +6,11 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -19,6 +21,7 @@ public class ScheduleResultResDto {
     @ApiModelProperty(value = "어웨이 팀")
     private String awayTeam;
     @ApiModelProperty(value = "날짜")
+
     private LocalDate date;
     @ApiModelProperty(value = "홈팀 점수")
     private int homeScore;

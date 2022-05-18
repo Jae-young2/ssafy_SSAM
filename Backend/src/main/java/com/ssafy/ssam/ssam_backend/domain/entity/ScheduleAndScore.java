@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -25,6 +26,7 @@ public class ScheduleAndScore {
     @ManyToOne
     @JoinColumn(name="away_teamId")
     private Team awayTeam;
+
 
     @Column
     private LocalDate date;
